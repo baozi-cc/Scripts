@@ -885,10 +885,10 @@ function createScript() {
   `
 }
 
-
 ;(async () => {
   if ($.html.indexOf('</body>') > -1) {
-  
+    const jfScript = ""
+
     console.log(`重写URL：${$.url}`)
     const n = createStyle(),
       e = createScript(),
