@@ -5,7 +5,7 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 30 : 5;
 const jd_quan_api=$.getdata('jd_quan_api');
-const jd_run_times=$.getdata('jd_run_times');
+const jd_run_times=$.getdata('jd_run_numbers');
 
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
