@@ -9,7 +9,13 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 30 : 5;
-const myUrl=process.env.myUrl;
+const  myUrl=process.env.myUrl;
+if($.isNode()){
+	 myUrl=process.env.myUrl;
+} else {
+	 myUrl=$.getdata('api');
+}
+//const myUrl=process.env.myUrl;
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
