@@ -8,20 +8,20 @@
     {
       "id": "抢JD券",
       "name": "通用重放抢券脚本",
-      "keys": ["run_num", "jd_quan_api"],
+      "keys": ["jd_run_times", "jd_run_numbers","jd_quan_api"],
       "settings": [
         {
-          "id": "run_num",
+          "id": "jd_run_times",
           "name": "自动循环次数(暂时无用)",
           "val": "",
           "type": "number"
         },
         {
-          "id": "interval",
-          "name": "间隔时间(暂时无用)",
+          "id": "run_numbers",
+          "name": "运行账号数量",
           "val": "",
           "type": "number",
-          "desc": "单位：毫秒"
+          "desc": "小于boxjs内cookie数量"
         },
         {
           "id": "jd_quan_api",
