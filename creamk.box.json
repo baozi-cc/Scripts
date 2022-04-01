@@ -8,33 +8,33 @@
     {
       "id": "抢JD券",
       "name": "通用重放抢券脚本",
-      "keys": ["run_num", "api"],
+      "keys": ["run_num", "jd_quan_api"],
       "settings": [
         {
           "id": "run_num",
-          "name": "自动循环次数",
+          "name": "自动循环次数(暂时无用)",
           "val": "",
           "type": "number"
         },
         {
           "id": "interval",
-          "name": "间隔时间",
+          "name": "间隔时间(暂时无用)",
           "val": "",
           "type": "number",
           "desc": "单位：毫秒"
         },
         {
-          "id": "api",
-          "name": "请求信息",
+          "id": "jd_quan_api",
+          "name": "券的api",
           "val": "",
           "type": "textarea",
           "autoGrow": true,
           "rows": 2
         }
       ],
-      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/quan.js",
+      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/jd_qx_quan.js",
       "author": "@creamk",
-      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/quan.js",
+      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/jd_qx_quan.js",
       "icons": [
         "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/ex.png",
         "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/ex.png"
