@@ -1,0 +1,44 @@
+{
+  "id": "CreamK.app.sub",
+  "name": "CreamK脚本订阅",
+  "author": "@CreamK",
+  "icon": "https://avatars0.githubusercontent.com/u/9592236",
+  "repo": "https://github.com/CreamK/Scripts",
+  "apps": [
+    {
+      "id": "抢JD券",
+      "name": "通用重放抢券脚本",
+      "keys": ["run_num", "api"],
+      "settings": [
+        {
+          "id": "run_num",
+          "name": "自动循环次数",
+          "val": "",
+          "type": "number"
+        },
+        {
+          "id": "interval",
+          "name": "间隔时间",
+          "val": "",
+          "type": "number",
+          "desc": "单位：毫秒"
+        },
+        {
+          "id": "api",
+          "name": "请求信息",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 2
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/quan.js",
+      "author": "@creamk",
+      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/quan.js",
+      "icons": [
+        "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/ex.png",
+        "https://raw.githubusercontent.com/id77/QuantumultX/master/icon/ex.png"
+      ]
+    }
+  ]
+}
