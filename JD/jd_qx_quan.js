@@ -5,7 +5,8 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 const randomCount = $.isNode() ? 30 : 5;
 const jd_quan_api=$.getdata('jd_quan_api');
-const jd_run_times=$.getdata('jd_run_numbers');
+const jd_run_times=$.getdata('jd_run_times');
+const jd_run_numbers=$.getdata('jd_run_numbers');
 
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
@@ -25,8 +26,8 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
   }
-  for (let j = 0; j < randomCount; ++j)
-    for (let i = 0;  i < jd_run_times ; i++) {
+  for (let j = 0; j < jd_run_times; ++j)
+    for (let i = 0;  i < jd_run_numbers; i++) {
       if (cookiesArr[i]) {
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
