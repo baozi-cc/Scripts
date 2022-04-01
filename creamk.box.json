@@ -17,7 +17,7 @@
           "type": "number"
         },
         {
-          "id": "run_numbers",
+          "id": "jd_run_numbers",
           "name": "运行账号数量",
           "val": "",
           "type": "number",
