@@ -12,7 +12,7 @@
       "settings": [
         {
           "id": "jd_run_times",
-          "name": "自动循环次数(暂时无用)",
+          "name": "抢券次数",
           "val": "",
           "type": "number"
         },
