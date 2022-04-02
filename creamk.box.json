@@ -39,6 +39,34 @@
         "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg",
         "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg"
       ]
+    },
+
+   {
+      "id": "xmSteps",
+      "name": "小米步数",
+      "keys": ["xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken", "xmSportsToken2"],
+      "settings": [
+        {
+          "id": "xmMinStep",
+          "name": "最小步数",
+          "val": "",
+          "type": "number"
+        },
+        {
+         "id": "xmMaxStep",
+          "name": "最大步数",
+          "val": "",
+          "type": "number"
+        }
+      ],
+      "script": "https://6678888.xyz/quantumultX/xmbs.js",
+      "author": "@creamk",
+      "repo": "https://6678888.xyz/quantumultX/xmbs.js",
+      "icons": [
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg",
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg"
+      ]
     }
+
   ]
 }
