@@ -44,7 +44,7 @@
    {
       "id": "xmSteps",
       "name": "小米步数",
-      "keys": ["xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken", "xmSportsToken2"],
+      "keys": ["xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken2", "xmSportsToken3"],
       "settings": [
         {
           "id": "xmMinStep",
