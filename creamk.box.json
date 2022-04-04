@@ -44,11 +44,17 @@
    {
       "id": "xmSteps",
       "name": "小米步数",
-      "keys": ["xmAccountNumbers","xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken2", "xmSportsToken3", "xmSportsToken4", "xmSportsToken5"],
+      "keys": ["xmAccountNumbers","xmCurrentAccount","xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken2", "xmSportsToken3", "xmSportsToken4", "xmSportsToken5"],
       "settings": [
         {
           "id": "xmAccountNumbers",
           "name": "账户数量",
+          "val": "",
+          "type": "number"
+        },
+        {
+          "id": "xmCurrentAccount",
+          "name": "当前账户",
           "val": "",
           "type": "number"
         },
@@ -69,8 +75,8 @@
       "author": "@creamk",
       "repo": "https://6678888.xyz/quantumultX/xmbs.js",
       "icons": [
-        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg",
-        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg"
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/run.jpg",
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/run.jpg"
       ]
     }
 
