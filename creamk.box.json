@@ -44,8 +44,14 @@
    {
       "id": "xmSteps",
       "name": "小米步数",
-      "keys": ["xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken2", "xmSportsToken3"],
+      "keys": ["xmAccountNumbers","xmMinStep", "xmMaxStep","xmSportsToken", "xmSportsToken2", "xmSportsToken3", "xmSportsToken4", "xmSportsToken5"],
       "settings": [
+        {
+          "id": "xmAccountNumbers",
+          "name": "账户数量",
+          "val": "",
+          "type": "number"
+        },
         {
           "id": "xmMinStep",
           "name": "最小步数",
