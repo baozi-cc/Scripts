@@ -71,9 +71,9 @@
           "type": "number"
         }
       ],
-      "script": "https://6678888.xyz/quantumultX/xmbs.js",
+      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/OtherScripts/xmbs.js",
       "author": "@creamk",
-      "repo": "https://6678888.xyz/quantumultX/xmbs.js",
+      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/OtherScripts/xmbs.js",
       "icons": [
         "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/run.jpg",
         "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/run.jpg"
