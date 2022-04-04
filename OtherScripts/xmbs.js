@@ -81,7 +81,7 @@ async function start() {
   }
 
 
-   if (login_token2) {
+  if (login_token2) {
     await get_app_token(login_token2);
     // console.log(`$.tokenInfo${JSON.stringify($.tokenInfo)}`)
     if ($.tokenInfo && $.tokenInfo.result === 'ok') {
