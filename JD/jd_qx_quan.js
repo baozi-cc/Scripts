@@ -6,6 +6,7 @@ let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭�
 const randomCount = $.isNode() ? 30 : 5;
 const jd_quan_api=$.getdata('jd_quan_api');
 const jd_run_times=$.getdata('jd_run_times');
+const jd_run_start=$.getdata('jd_run_start');
 const jd_run_numbers=$.getdata('jd_run_numbers');
 
 //IOS等用户直接用NobyDa的jd cookie
@@ -27,7 +28,7 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
     return;
   }
   for (let j = 0; j < jd_run_times; ++j)
-    for (let i = 0;  i < jd_run_numbers; i++) {
+    for (let i = jd_run_start;  i < jd_run_numbers+jd_run_start; i++) {
       if (cookiesArr[i]) {
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
