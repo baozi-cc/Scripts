@@ -8,14 +8,10 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
+
+const jd_quan_api=process.env.jd_quan_api;//抢券api
 const randomCount = $.isNode() ? 30 : 5;
-const  myUrl=process.env.myUrl;
-if($.isNode()){
-	 myUrl=process.env.myUrl;
-} else {
-	 myUrl=$.getdata('api');
-}
-//const myUrl=process.env.myUrl;
+
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
@@ -86,7 +82,7 @@ function exchange() {
 
 function taskUrl(function_id, body = {}) {
   return {
-    url: myUrl,
+    url: jd_quan_api,
     headers: {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate, br",
