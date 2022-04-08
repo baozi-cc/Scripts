@@ -8,13 +8,20 @@
     {
       "id": "抢JD券",
       "name": "通用重放抢券脚本",
-      "keys": ["jd_run_times", "jd_run_numbers","jd_quan_api"],
+      "keys": ["jd_run_times","jd_run_start","jd_run_numbers","jd_quan_api"],
       "settings": [
         {
           "id": "jd_run_times",
           "name": "抢券次数",
           "val": "",
           "type": "number"
+        },
+        {
+          "id": "jd_run_start",
+          "name": "第一个账号",
+          "val": "",
+          "type": "number",
+          "desc": "填写第一个账号"
         },
         {
           "id": "jd_run_numbers",
