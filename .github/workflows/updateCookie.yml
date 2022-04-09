@@ -11,6 +11,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    env:
+       JD_WSCK: ${{ secrets.JD_WSCK}}
+       QL_ADDR: ${{ secrets.QL_ADDR}}
 
     steps:
       - name: 检查分支
@@ -29,5 +33,4 @@ jobs:
         run: |
           export TZ='Asia/Shanghai'
           python updateCookie.py
-          JD_WSCK: ${{ secrets.JD_WSCK}}
-          QL_ADDR: ${{ secrets.QL_ADDR}}
+         
