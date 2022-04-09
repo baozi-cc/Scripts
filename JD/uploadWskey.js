@@ -10,8 +10,8 @@ let CK = $request.headers['Cookie'] || $request.headers['cookie'];
 
 const pin = CK.match(/pin=([^=;]+?);/)[1];
 const key = CK.match(/wskey=([^=;]+?);/)[1];
-const _TGUserID = $.getData('CreamK_JD_Bot');
-const _TGBotToken = $.getData('CreamK_JD_Bot_Token');
+const _TGUserID = $.getData('CreamK_TG_User_ID');
+const _TGBotToken = $.getData('CreamK_TG_Bot_Token');
 
 $.TGBotToken = _TGBotToken;
 $.TGUserIDs = [];
