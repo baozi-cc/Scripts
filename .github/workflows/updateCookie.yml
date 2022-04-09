@@ -1,0 +1,31 @@
+# 当有改动推送到master分支时，启动Action
+name: 更新cookie
+
+on:
+  schedule:
+    - cron: '1 */3 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: sync-6Svip120apk69-gitee_q8qsTAUA_cThxc1RBVUE
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检查分支
+        uses: actions/checkout@v2
+
+      - name: 安装 Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: 安装模块
+        run: |
+          pip install -r requirements.txt
+
+      - name: 运行程序
+        run: |
+          export TZ='Asia/Shanghai'
+          python updateCookie.py
