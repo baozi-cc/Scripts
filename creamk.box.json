@@ -85,7 +85,46 @@
         "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/run.jpg",
         "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/run.jpg"
       ]
+    },
+    
+    
+    {
+      "id": "Wskey管理",
+      "name": "Wskey管理",
+      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token"],
+      "settings": [
+        {
+          "id": "CreamK_TG_User_ID",
+          "name": "TG用户ID",
+          "val": "",
+          "type": "textarea"
+        },
+        {
+          "id": "CreamK_TG_Bot_Token",
+          "name": "TG接收通知Bot的Token",
+          "val": "",
+          "type": "textarea"
+        },
+        {
+          "id": "wskeyList",
+          "name": "运行账号数量",
+          "val": "",
+          "type": "textarea",
+          "autoGrow": true,
+          "rows": 2 
+        }
+      ],
+      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/jd_qx_quan.js",
+      "author": "@creamk",
+      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/jd_qx_quan.js",
+      "icons": [
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg",
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg"
+      ]
     }
+    
+    
+    
 
   ]
 }
