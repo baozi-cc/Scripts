@@ -114,12 +114,12 @@
           "rows": 2 
         }
       ],
-      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/jd_qx_quan.js",
+      "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/uploadWskey.js",
       "author": "@creamk",
-      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/jd_qx_quan.js",
+      "repo": "https://raw.githubusercontent.com/CreamK/Scripts/main/JD/uploadWskey.js",
       "icons": [
-        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg",
-        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/jd_quan.jpg"
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/lock.jpeg",
+        "https://raw.githubusercontent.com/CreamK/Scripts/main/Picture/lock.jpeg"
       ]
     }
     
