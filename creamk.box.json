@@ -89,25 +89,25 @@
     
     
     {
-      "id": "Wskey管理",
+      "id": "Upload_Wskey",
       "name": "Wskey管理",
-      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token"],
+      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","wskeyList"],
       "settings": [
         {
           "id": "CreamK_TG_User_ID",
           "name": "TG用户ID",
           "val": "",
-          "type": "textarea"
+          "type": "text"
         },
         {
           "id": "CreamK_TG_Bot_Token",
           "name": "TG接收通知Bot的Token",
           "val": "",
-          "type": "textarea"
+          "type": "text"
         },
         {
           "id": "wskeyList",
-          "name": "运行账号数量",
+          "name": "wskeyList",
           "val": "",
           "type": "textarea",
           "autoGrow": true,
