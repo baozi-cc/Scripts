@@ -1,2 +1,2 @@
 # Scripts
-自用，勿fork！
+see you later~
