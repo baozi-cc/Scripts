@@ -604,10 +604,7 @@ async function run_rw() {
         await $.wait(10000);
     }
     //刷短视频
-    if (ShortvideoPlay == 0) {
-        await dsj_sdsp()//刷短视频
-        await $.wait(10000);
-    }
+    
 
 }
 //浏览广告赚
