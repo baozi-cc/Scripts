@@ -111,8 +111,8 @@ function updateCookie(cookie, TGUserID) {
         } else {
           data = JSON.parse(data);
           if (data.ok) {
-            console.log(`已发送 wskey 至 ${TGUserID}🎉\n`);
-            $.resData = `已发送 wskey 至 ${TGUserID}🎉`;
+            console.log(`已发送 wskey(${cookie}) 至 ${TGUserID}🎉\n`);
+            $.resData = `已发送 wskey(${cookie}) 至 ${TGUserID}🎉`;
           } else if (data.error_code === 400) {
             console.log(`发送失败，请联系 ${TGUserID}。\n`);
             $.resData = `发送失败，请联系 ${TGUserID}。`;
