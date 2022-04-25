@@ -103,7 +103,7 @@ function hyxsusers(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/users`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
     }
     $.get(url, async (err, resp, data) => {
       try {
@@ -127,7 +127,7 @@ function hyxssign(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/excitation/browse`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
       body : `{"type":"signin","mark":""}`
     }
     $.post(url, async (err, resp, data) => {
@@ -158,7 +158,7 @@ function hyxsbrowse(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/excitation/browse`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
       body : `{"type":"sunlight","mark":""}`
     }
     $.post(url, async (err, resp, data) => {
@@ -183,7 +183,7 @@ function hyxsland(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/land`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
       body : ``,
     }
     $.post(url, async (err, resp, data) => {
@@ -224,7 +224,7 @@ function hyxsone(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/land/one`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
      body : `{"mark":${mark}}`
     }
     $.post(url, async (err, resp, data) => {
@@ -248,7 +248,7 @@ function hyxscollect(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/collect`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
      body : `{"land":"${mark}"}`
     }
     $.post(url, async (err, resp, data) => {
@@ -272,7 +272,7 @@ function hyxspage(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/backpack?page=1`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
      // body : ``,
     }
     $.get(url, async (err, resp, data) => {
@@ -305,7 +305,7 @@ function hyxsbuy(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/shop/buy`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
      body : `{"id":1003,"amount":1}`
     }
     $.post(url, async (err, resp, data) => {
@@ -328,7 +328,7 @@ function hyxssubmit(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/machining/submit`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
       body : `{"amount":10}`,
     }
     $.post(url, async (err, resp, data) => {
@@ -354,7 +354,7 @@ function hyxsmachining(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/machining`,
-      headers: JSON.parse($.getdata('hyxshd'))
+      headers: JSON.parse(hyxshd)
       //body : `{"amount":10}`,
     }
     $.get(url, async (err, resp, data) => {
@@ -385,7 +385,7 @@ function hyxstakeout(timeout = 0) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yezi.jiaaisi.cn/machining/takeout`,
-      headers: JSON.parse($.getdata('hyxshd')),
+      headers: JSON.parse(hyxshd),
       body : `{"id":${id}}`,
     }
     $.post(url, async (err, resp, data) => {
