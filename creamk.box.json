@@ -21,14 +21,14 @@
           "name": "第一个账号",
           "val": "",
           "type": "number",
-          "desc": "填写第一个账号"
+          "desc": "填写第一个账号,从0开始"
         },
         {
           "id": "jd_run_numbers",
           "name": "运行账号数量",
           "val": "",
           "type": "number",
-          "desc": "小于boxjs内cookie数量"
+          "desc": "第一个账号和运行账号之和小于boxjs内cookie数量"
         },
         {
           "id": "jd_quan_api",
