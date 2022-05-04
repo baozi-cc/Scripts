@@ -33,7 +33,6 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
         $.index = i + 1;
-        console.log(i);
         console.log(`*********京东账号${$.index} ${$.UserName}*********`)
         $.isLogin = true;
         $.nickName = '';
