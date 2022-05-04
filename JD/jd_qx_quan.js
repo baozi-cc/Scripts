@@ -30,10 +30,10 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
   for (let j = 0; j < jd_run_times; ++j)
     for (let i = jd_run_start;  i < jd_run_numbers+jd_run_start; i++) {
       if (cookiesArr[i]) {
-        cookie = cookiesArr[i]
-        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-        $.index = i + 1
-        console.log(`${$.index}`)
+        cookie = cookiesArr[i];
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+        $.index = i + 1;
+        console.log(`${$.index}`);
         console.log(`*********京东账号${$.index} ${$.UserName}*********`)
         $.isLogin = true;
         $.nickName = '';
