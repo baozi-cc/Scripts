@@ -14,12 +14,16 @@ Cookie2=...
 
 
 const $ = new Env('cookie自动替换');
+const axios = require('axios')
 const notify = $.isNode() ? require('./sendNotify') : '';
 // //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 // //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, noFailure = true;
-
+const cookiePath = '../config/cookie.sh'
+const wskeyPath = '../config/wskey.sh'
+//IOS等用户直接用NobyDa的jd cookie
+// axios.maxRedirects: 5, // default
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -73,7 +77,7 @@ function runAll() {
       let newCookie = await getJDCookie(tokenKey)
       if (wskey != "" && tokenKey != undefined && newCookie != "") {
         console.log(`账号的wskey: ${wskey}\n账号的tokenKey: ${tokenKey}\n新的Cookie: ${newCookie}\n`);
-        //result = await addCookie(newCookie)
+        result = await addCookie(newCookie)
       } else {
         console.log(`账号的wskey: ${wskey}\n账号的tokenKey: ${tokenKey}\n`);
         result = "wskey/tokenKey/newCookie为空，替换错误！"
@@ -144,7 +148,7 @@ function findWskey(pin) {
   return new Promise(async resolve => {
     let wskey = ""
     try {
-      let wskeyArr =  [$.getdata('WskeyJD'), $.getdata('WskeyJD2'), ...jsonParse($.getdata('wskeyList') || "[]").map(item => item.cookie)].filter(item => !!item);
+      let wskeyArr = [$.getdata('WskeyJD'), $.getdata('WskeyJD2'), ...jsonParse($.getdata('wskeyList') || "[]").map(item => item.cookie)].filter(item => !!item);
       // let pin = cookiesArr[i].match(/(?<=pt_pin=).*(?=;)/)[0];
       for (let i = 0; i < wskeyArr.length; i++) {
         wskey = wskeyArr[i]
@@ -282,8 +286,7 @@ function getJDCookie(tokenKey) {
         return status >= 200 && status == 302;  // 默认
       },
     }
-    
-    $.post(option, async (err, resp, data) => {
+    axios(option).then(resp => {
       let data = ""
       // console.log(typeof resp);
       try {
@@ -304,8 +307,7 @@ function getJDCookie(tokenKey) {
         // console.log(data);
         resolve(data);
       }
-    })
-	  
+    }) 
   })
 }
 
