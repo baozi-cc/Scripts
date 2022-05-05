@@ -10,7 +10,6 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let optionsA ='';
 //'wskey=2222; pin=111;',//账号1ck,例:pin=XXX;wskey=XXX;如有更多,依次类推
 let wskeysArr = [
-    'wskey=2222; pin=111;'
 ];
 if ($.isNode()) {
     Object.keys(jdWskeyNode).forEach((item) => {
@@ -18,7 +17,7 @@ if ($.isNode()) {
     })
     if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  wskeysArr = [$.getdata('WskeyJD'), $.getdata('WskeyJD2'), ...jsonParse($.getdata('WskeyList') || "[]").map(item => item.cookie)].filter(item => !!item);
+  wskeysArr = [$.getdata('WskeyJD'), $.getdata('WskeyJD2'), ...jsonParse($.getdata('wskeyList') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 !(async () => {
     if (!wskeysArr[0]) {
