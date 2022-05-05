@@ -90,8 +90,15 @@ async function appjmp() {
 				'referer': 'plogin.m.jd.com'
             }
         }
-		var req  = request(options, function(err, resp, data) {
-			ckA = resp.headers["set-cookie"];
+	
+	return new Promise(resolve => {
+        $.post(config, async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`)
+                    console.log(`${$.name} API请求失败，请检查网路重试1`)
+                } else {
+                    ckA = resp.headers["set-cookie"];
 			var pt_key = '';
 			var pt_pin = '';
 			 for(var i=0;i<ckA.length;i++){
@@ -106,8 +113,17 @@ async function appjmp() {
 			 pt_pin = pt_pin.split(';')[0];
 			 ck = pt_key + ';' + pt_pin + ';'
 			console.log(ck)
-			req.end();
-		});
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve(data);
+            }
+        })
+    })
+	
+	
+	
 }
 function jsonParse(str) {
   if (typeof str == "string") {
