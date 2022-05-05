@@ -92,7 +92,7 @@ async function appjmp() {
         }
 	
 	return new Promise(resolve => {
-        $.post(config, async (err, resp, data) => {
+        $.post(options, async (err, resp, data) => {
             try {
                 if (err) {
                     console.log(`${JSON.stringify(err)}`)
