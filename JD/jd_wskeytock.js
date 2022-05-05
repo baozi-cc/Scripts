@@ -99,6 +99,7 @@ async function appjmp() {
                     console.log(`${$.name} API请求失败，请检查网路重试1`)
                 } else {
                         ckA = resp.headers["set-cookie"];
+			console.log(`ckA`,ckA);
 			var pt_key = '';
                         var pt_pin = '';
 			if(ckA[0].indexOf('pt_key') != -1){
