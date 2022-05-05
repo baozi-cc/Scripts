@@ -18,7 +18,7 @@ if ($.isNode()) {
     })
     if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  wskeysArr = [$.getdata('WskeyJD'), $.getdata('WskeyJD2'), ...jsonParse($.getdata('WskeyJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+  wskeysArr = [$.getdata('WskeyJD'), $.getdata('WskeyJD2'), ...jsonParse($.getdata('WskeyList') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 !(async () => {
     if (!wskeysArr[0]) {
