@@ -282,25 +282,30 @@ function getJDCookie(tokenKey) {
         return status >= 200 && status == 302;  // 默认
       },
     }
-  var req = request(option, function (err, resp, data) {
-    ckA = resp.headers['set-cookie'];
-    var pt_key = '';
-    var pt_pin = '';
-    for (var i = 0; i < ckA.length; i++) {
-      if (ckA[i].indexOf('pt_key') != -1) {
-        pt_key = ckA[i];
+    
+    $.post(option, async (err, resp, data) => {
+      let data = ""
+      // console.log(typeof resp);
+      try {
+        let headers = resp['headers']['set-cookie'].toString();
+        let pt_pin = headers.match(/pt_pin.*?;/)[0];
+        data = headers.match(/pt_key.*?;/)[0] + pt_pin;
+        
+        if (data.indexOf("fake") != -1) {
+          console.log(`${pt_pin}: wskey状态失效`);
+          data = "";
+        } else {
+          console.log(`${pt_pin}: wskey状态正常`);
+        }
+      } catch (e) {
+        data = "";
+        console.log(e);
+      } finally {
+        // console.log(data);
+        resolve(data);
       }
-      if (ckA[i].indexOf('pt_pin') != -1) {
-        pt_pin = ckA[i];
-      }
-    }
-    pt_key = pt_key.split(';')[0];
-    pt_pin = pt_pin.split(';')[0];
-    ck = pt_key + ';' + pt_pin + ';';
-    console.log(ck);
-    req.end();
-  });
-	 resolve(ck);
+    })
+	  
   })
 }
 
