@@ -98,21 +98,13 @@ async function appjmp() {
                     console.log(`${JSON.stringify(err)}`)
                     console.log(`${$.name} API请求失败，请检查网路重试1`)
                 } else {
-                        ckA = resp.headers["set-cookie"];
-			console.log(`ckA`,ckA);
-			var pt_key = '';
-                        var pt_pin = '';
-			if(ckA[0].indexOf('pt_key') != -1){
-			   pt_key = ckA[0];
-			 }
-			 if(ckA[0].indexOf('pt_pin') != -1){
-			   pt_pin = ckA[0];
-			 }
-	
-			 pt_key = pt_key.split(';')[0];
-			 pt_pin = pt_pin.split(';')[0];
-			 ck = pt_key + ';' + pt_pin + ';'
-			 console.log(ck)
+                        let headers = resp['headers']['set-cookie'].toString();
+			let pt_pin = headers.match(/pt_pin.*?;/)[0];
+			let pt_key = headers.match(/pt_key.*?;/)[0];
+			console.log(`headers`,headers);
+			ck = pt_key + ';' + pt_pin + ';'
+			console.log(`ck`,ck);
+			console.log(ck)
                 }
             } catch (e) {
                 $.logErr(e, resp)
