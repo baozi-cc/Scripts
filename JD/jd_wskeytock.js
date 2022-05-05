@@ -14,7 +14,6 @@ Cookie2=...
 
 
 const $ = new Env('cookie自动替换');
-const axios = require('axios')
 const notify = $.isNode() ? require('./sendNotify') : '';
 // //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -286,22 +285,22 @@ function getJDCookie(tokenKey) {
         return status >= 200 && status == 302;  // 默认
       },
     }
-    axios(option).then(resp => {
+    $.post(config, async (err, resp, data) => {
       let data = ""
       // console.log(typeof resp);
       try {
         let headers = resp['headers']['set-cookie'].toString();
         let pt_pin = headers.match(/pt_pin.*?;/)[0];
-        data = headers.match(/pt_key.*?;/)[0] + pt_pin;
+        ck = headers.match(/pt_key.*?;/)[0] + pt_pin;
         
-        if (data.indexOf("fake") != -1) {
+        if (ck.indexOf("fake") != -1) {
           console.log(`${pt_pin}: wskey状态失效`);
-          data = "";
+          ck = "";
         } else {
           console.log(`${pt_pin}: wskey状态正常`);
         }
       } catch (e) {
-        data = "";
+        ck = "";
         console.log(e);
       } finally {
         // console.log(data);
