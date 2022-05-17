@@ -1,46 +1,61 @@
+from email import message
 import json
 import math
 import random
 import threading
 import time
 import datetime
-# pip3 install requests
 import requests
 import os
 import sys
 import re
+import  urllib
+import logging
+import traceback
 
 # 获取时间戳网址：https://tool.lu/timestamp/   5/8 5/7 23:59:58
-'''
-#9.9秒杀
-10-2 7/10/16/20
-key=99E9BFB397BB9E081C3D211644F4D63B80C6629BF10290DBE13C6C11E1DF025FE3774FB37875ED1B720ABB1A6023D3B4_bingo,roleId=3FE9EECAAA41B666E4FFAF79F20E21129412DAD4469A00C14E234FFC59430A3B03E9CF1047D2889AA3D9F3A3AC9845F06DD6177A62EF3A4A570EC8E5C227CE0E4892C7A1A2B984AB9B022706661B4828BA6ED364141E21A7499FE93EB659B4824F445AC4EAB78AF162CA2B7289EDF2DB3F8144DBC4D261FB9826BF7F88790CF94A2ADC829BEE300EB9E27DAD459EA19FE22F265CEE7EE1E0E926357D049A9C9A01413BFC73541208CCC10919AE1DD223_bingo,strengthenKey=4C8818C1732D1A7B9733D611F28BD8B57923ADE220C9B60370F65B533E02E0F8F7A8DB4211A7817EF606DDAD4FA3E67F_bingo
-19-5 0/10/18/22
-key=E72F2D6FD3B257AE6EAEEF81FEF44D9C3EFB9B5E0F0E11C4562D68BDA7BA69BF5C4E716FB9BBD7B1678E83551EA3A72E_bingo,roleId=3FE9EECAAA41B666E4FFAF79F20E21120520F1A5AFE5C9E8D77BD263F6726B9E3576C6C5571777201DA90CF204F2336AB211D7BA6D0E7255BAFF71BCC9ED7782F4BB5E97DDCA47183788BB228E79E0C34E78DF222617DBB46340CDD576D690369CEEB51EF2CC0DA24F159511AE4AD2EEF70B78A6287ED7D00634575733C0075CBA0ADD06A277A0DF84645DB74FF0C01DCED7EA5DCB5577E762C4029AD5172CE71951D9E209BD08E2DA0A722CF6411B58_bingo,strengthenKey=4C8818C1732D1A7B9733D611F28BD8B57923ADE220C9B60370F65B533E02E0F8E6A0FEFA632101D3D5409FE4F92580CF_bingo
-#夏香节
-5-2 9/12/18/22
-key=BCE52145EC2FBDDE212899674C8CA1C12A3A133EEA5D70CB9D998AF6B3F4648C22AC20BFEB2B797D1292322C150A0DC2_bingo,roleId=3FE9EECAAA41B666E4FFAF79F20E211241BC51D1C03478640D4EF32FA22832B7C93468B462C8C368D7E33CA18F54891E8F724E3FA38C39E3AFF697601E6A963307103764559652634BA6CCE6381F1828DFFEA73CB1112D3B93F9141F71E772892890D12BAB366ADD8CB74520EFA0FDB0B46FCC528187867EF0EAB793451D2FFE1C4D4F8720CBC88786C9BFFE59122E55363C69842BD1673DD4A73213F87E6D0D714352B5F3FE5B0BCF0235EB9CB43C5C_bingo,strengthenKey=4C8818C1732D1A7B9733D611F28BD8B57923ADE220C9B60370F65B533E02E0F82F810FA48DCD7A31F76CAE44623F2470_bingo
-15-8 9/12/15/18/20
-key=DDF1B71D0AF91A8547973CE5362A890F18C8E73AAC10BA9179CE5D2D745E95AC9AC125029761397270C947AC9F5E11CE_bingo,roleId=3FE9EECAAA41B666E4FFAF79F20E2112EC5A32B22271AD04523B3C66AE5807591E0DB913F0F40F86F97AAA49D12C568D47FEEE50418AD25C6B23D81C476A40CB07BCCE74C4EDAD2E0D1BCF515F06DECE783A16EA99A0959CAC63BDF9BD9A9037450AB25EE84616EF9E65486A529F6690F93EA6903FF6754FD22FD39B43821B0041487D3996E0CF72C487DD107C4D0F13EA507700B35B495859747F1E700186EA385A46F6ED361FE40B11663D21263EB1_bingo,strengthenKey=4C8818C1732D1A7B9733D611F28BD8B57923ADE220C9B60370F65B533E02E0F823A5E9624E2105020B0FB67EE3BFC671_bingo
-19-5 0/10/18/20
-key=CB80DDB21929DB2DB9849A60F929CCB99B3BF927A75E71562ADB7CEC61846545338F6E4517C1973762A51B43E2C88518_bingo,roleId=3FE9EECAAA41B666E4FFAF79F20E21120520F1A5AFE5C9E8D77BD263F6726B9E5E06C7051840093D00E358BF32A400ED69C31825CC6E0B4002396D97E04CBE9B95BD50D3490D09DC4746C78A5C257455D11BB1F359F00BC8367524EC3D44EDDA221AD90D25402C0AED4BCE9EFBC506428188DEBB9A3B93AA72D7CF3C822077B7D4A2456215E02A8A3DA720FF426525BC40D44921C13A1FE2CDFEDBB98CF065955FEED95F578D1A7D0C8ED8051EBD5E53_bingo,strengthenKey=4C8818C1732D1A7B9733D611F28BD8B57923ADE220C9B60370F65B533E02E0F8E6A0FEFA632101D3D5409FE4F92580CF_bingo
-'''
+
+
 
 ######################################################
 #可以改的参数
-#1、券的key名称  quan_key
+#1、券的api  quan_api
 #2、可以读取青龙的cookie
 #3、使用cookie的下标（从0开始） quan_account_index ，默认执行第一个
 ######################################################
 
+
 range_n = 20  # 单个cookie线程个数
 range_sleep = 0.3  # 间隔时间
 
+# 没用的参数
+log_list = []
+atime = 0
+
+
+logger = logging.getLogger(name=None)  # 创建一个日志对象
+logging.Formatter("%(message)s")  # 日志内容格式化
+logger.setLevel(logging.INFO)  # 设置日志等级
+logger.addHandler(logging.StreamHandler())  # 添加控制台日志
+# logger.addHandler(logging.FileHandler(filename="text.log", mode="w"))  # 添加文件日志
+
+
 # 券的参数
-if 'quan_key' in os.environ:
-    args=os.environ["quan_key"]
+def get_args(url):
+    deUrl=urllib.parse.unquote(url)
+    start_pos=re.search("args", deUrl).start()
+    start_pos=start_pos+7
+    end_pos=len(deUrl)-2
+    args=deUrl[start_pos:end_pos]
+    return args
+
+if 'quan_api' in os.environ:
+    quan_api=os.environ["quan_api"]
+    args=get_args(quan_api)
 else:
     args = 'key=CB80DDB21929DB2DB9849A60F929CCB99B3BF927A75E71562ADB7CEC61846545338F6E4517C1973762A51B43E2C88518_bingo,roleId=3FE9EECAAA41B666E4FFAF79F20E21120520F1A5AFE5C9E8D77BD263F6726B9E5E06C7051840093D00E358BF32A400ED69C31825CC6E0B4002396D97E04CBE9B95BD50D3490D09DC4746C78A5C257455D11BB1F359F00BC8367524EC3D44EDDA221AD90D25402C0AED4BCE9EFBC506428188DEBB9A3B93AA72D7CF3C822077B7D4A2456215E02A8A3DA720FF426525BC40D44921C13A1FE2CDFEDBB98CF065955FEED95F578D1A7D0C8ED8051EBD5E53_bingo,strengthenKey=4C8818C1732D1A7B9733D611F28BD8B57923ADE220C9B60370F65B533E02E0F8E6A0FEFA632101D3D5409FE4F92580CF_bingo'
+
+
 
 # 获取cookie
 if 'JD_COOKIE' in os.environ:
@@ -48,10 +63,10 @@ if 'JD_COOKIE' in os.environ:
 else:
     ori_cookies =['' ]
 if len(ori_cookies)==0:
-    print("未发现cookie")
+    logger.info("未发现cookie")
     sys.exit(0)
 
-#获取抢券下标
+#获取抢券下标,并根据下标提取ck
 if 'quan_account_index' in os.environ:
     quan_account_index=os.environ["quan_account_index"]
 else:
@@ -61,7 +76,7 @@ account_index=re.findall(r"\d+",quan_account_index)
 cookies=[]
 for i in range(len(account_index)):
     if int(account_index[i])>len(ori_cookies)-1:
-        print("下标超出，请检查参数 quan_account_index ,默认从0开始哦！")
+        logger.info("下标超出，请检查参数 quan_account_index ,默认从0开始哦！")
         sys.exit(0)
     else:
         cookies.append(ori_cookies[int(account_index[i])])
@@ -72,9 +87,21 @@ for i in range(len(account_index)):
 # 总线程个数
 range_n = int(len(cookies)) *range_n  
 
-# 没用的参数
-log_list = []
-atime = 0
+
+# 加载通知
+def load_send() -> None:
+    logger.info("加载推送功能中...")
+    global send
+    send = None
+    cur_path = os.path.abspath(os.path.dirname(__file__))
+    sys.path.append(cur_path)
+    if os.path.exists(cur_path + "/notify.py"):
+        try:
+            from notify import send
+        except Exception:
+            send = None
+            logger.info(f"❌加载通知服务失败!!!\n{traceback.format_exc()}")
+
 
 
 #获取下一个时间戳
@@ -112,7 +139,7 @@ def Ua():
     return UA
 
 
-def qiang_15_8(cookie, i):
+def qiang_quan(cookie, i):
     url = 'https://api.m.jd.com/client.action?functionId=lite_newBabelAwardCollection&client=wh5'
     headers = {
         "Accept": "*/*",
@@ -136,9 +163,15 @@ def qiang_15_8(cookie, i):
     try:
         res = requests.post(url=url, headers=headers, data=data).json()
         if res['code'] == '0':
-            print(res['subCodeMsg'])
+            logger.info(res['subCodeMsg'])
+            if res['subCodeMsg']=='领取成功！感谢您的参与，祝您购物愉快~':
+                send('🔔京东极速版抢券!',res['subCodeMsg'])
+                sys.exit(0)
+            if res['subCodeMsg'].find('抢完'):
+                sys.exit(0)
         else:
-            print(res['errmsg'])
+            logger.info(res['errmsg'])
+            
     except:
         pass
 
@@ -157,29 +190,33 @@ def jdtime():
  
 
 if __name__ == '__main__':
-    print('极速版抢券准备...')
+    
+    # 加载通知部分
+    load_send()
 
-    print('开始获取log...')
+    logger.info('极速版抢券准备...')
+    logger.info('开始获取log...')
     get_log_list(range_n)
-    print('log获取完毕!\n')
+    logger.info('log获取完毕!\n')
 
-    print('开始配置线程...')
+    logger.info('开始配置线程...')
     tasks = list()
     if len(log_list) != 0:
-        print(f'{len(log_list)}条log获取完毕') 
+        logger.info(f'{len(log_list)}条log获取完毕') 
         j=0
         for i in range(int(range_n)):
-            tasks.append(threading.Thread(target=qiang_15_8, args=(cookies[j], i)))
+            tasks.append(threading.Thread(target=qiang_quan, args=(cookies[j], i)))
             j=j+1
             j=j%len(cookies)
     else:
-        print('暂无可用log')
-    print('线程配置完毕!\n')
-
-    print('开始等待...')
+        logger.infot('暂无可用log')
+    logger.info('线程配置完毕!\n')
+    
+    logger.info('开始等待...')
     starttime =get_next_timeStamp()*1000-2000
+
     if starttime-time.time()*1000>20000:
-        print(f'时间过长,将先睡眠{(starttime-time.time()*1000)/1000}秒!')
+        logger.info(f'等待时间过长,为节约资源将先睡眠{(starttime-time.time()*1000)/1000}秒!')
         time.sleep((starttime-time.time()*1000)/1000)
 
     while True:
@@ -188,19 +225,18 @@ if __name__ == '__main__':
         else:
             if int(time.time()*1000) - atime >= 1000:
                 atime = int(time.time()*1000)
-                print(f'还差{int((starttime - int(time.time()*1000)) / 1000)}秒!')   
+                logger.info(f'还差{int((starttime - int(time.time()*1000)) / 1000)}秒!')   
 
-
-    print('开始喽!!')
+    logger.info('抢券开始喽!!')
     while True:
         if jdtime() >= starttime:
             i=0
             for task in tasks:
                 task.start()
-                if i%len(cookies) == len(cookies)-1:
+                if i%len(cookies) == len(cookies)-1:  #一组cookie跑完
                     time.sleep(range_sleep)
                 i=i+1
             for task in tasks:
                 task.join()
             break
-    print('抢券结束')
+    logger.info('抢券结束')
