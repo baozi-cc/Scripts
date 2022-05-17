@@ -25,8 +25,8 @@ import traceback
 ######################################################
 
 
-range_n = 20  # 单个cookie线程个数
-range_sleep = 0.3  # 间隔时间
+range_n = 30  # 单个cookie线程个数
+range_sleep = 0.1  # 间隔时间
 
 # 没用的参数
 log_list = []
