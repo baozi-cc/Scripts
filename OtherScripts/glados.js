@@ -63,19 +63,29 @@ var remainday;
 var change;
 var changeday;
 var msge;
-var message = "";
-var message_day ="";
+
+
 !(async () => {
   if (typeof $request != "undefined") {
     getCookie();
     return;
   }
+
+  $.message = "";
+  $.message_sign ="";
+  $.message_flows="";
   await signin(sicookie);
+  await get_flows(sicookie);
   await status(sicookie);
-  message=message+'\n'
+  $.message=$.message+'\n'
+  $.message_flows=" "//清空get_flows里的消息
+  $.message_sign=" "//清空chekin里的消息
+  
   await signin(sicookie_edu);
+  await get_flows(sicookie_edu);
   await status(sicookie_edu);
-  await notify.sendNotify($.name, message);
+  
+  await notify.sendNotify($.name, $.message);
 })()
   .catch((e) => {
     $.log("", `❌失败! 原因: ${e}!`, "");
@@ -83,6 +93,8 @@ var message_day ="";
   .finally(() => {
     $.done();
   });
+  
+
 
 function signin(sicookie) {
   return new Promise((resolve) => {
@@ -109,7 +121,7 @@ function signin(sicookie) {
       var obj = JSON.parse(body);
       msge = obj.message;
       if (msge == "Please Checkin Tomorrow") {
-        message_day += "今日已签到";
+        $.message_sign += "今日已签到\n";
       }
       var date = new Date();
       var y = date.getFullYear();
@@ -123,9 +135,9 @@ function signin(sicookie) {
       if (JSON.stringify(time) == JSON.stringify(sysdate)) {
         change = obj.list[0].change;
         changeday = parseInt(change);
-        message_day += `今日签到获得${changeday}天`;
+        $.message_sign += `今日签到获得${changeday}天\n`;
       } else {
-        message_day += `今日签到获得0天`;
+        $.message_sign += `今日签到获得0天\n`;
       }
       
       resolve();
@@ -147,11 +159,11 @@ function status(sicookie) {
         expday = obj.data.days;
         remain = obj.data.leftDays;
         remainday = parseInt(remain);
-        message += `账户：${account}`
-        message += `\n已用${expday}天,剩余${remainday}天`;
-        message +=message_day
-        message_day=" "//清空chekin里的消息
-        $.msg("GLaDOS", `账户：${account}`, message);
+        $.message += `账户：${account}\n`
+        $.message += `已用${expday}天,剩余${remainday}天\n`;
+        $.message +=$.message_flows
+        $.message +=$.message_sign
+        $.msg("GLaDOS", `账户：${account}`, $.message);
       } else {
         $.log(response);
         $.msg("GLaDOS", "", "❌请重新登陆更新Cookie");
@@ -160,7 +172,42 @@ function status(sicookie) {
     });
   });
 }
+function get_flows(cookie){
+  return new Promise((resolve) => {
+    const usageRequest = {
+      url: "https://glados.rocks/api/user/usage",
+      headers: { 
+        Cookie: cookie ,
+        Connection : `keep-alive`,
+        Accept : `application/json, text/plain, */*,`,
+        Host : `glados.rocks`,
+        "User-Agent" : `Mozilla/5.0 (iPhone; CPU iPhone OS 15_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Mobile/15E148 Safari/604.1`,
+        "Accept-Language" : `zh-CN,zh-Hans;q=0.9`
+      
+      },
+    };
+    $.get(usageRequest, (error, response, data) => {
+      var body = response.body;
+      var obj = JSON.parse(body);
+      if (obj.code == 0) {
+        flows = obj.data;
+        $.sum=0;
+        for(i=0;i<flows.length;i++){
+          $.sum=$.sum+flows[i][1];
+        }
+        $.sum=$.sum/1000000000
+        $.message_flows=`本月已经使用${$.sum} G流量\n`
+      } else {
+        $.log(response);
+        $.msg("GLaDOS", "", "❌请重新登陆更新Cookie");
+      }
+      resolve();
+    });
+  });
 
+
+
+}
 function getCookie() {
     if (
       $request &&
