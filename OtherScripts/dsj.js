@@ -320,7 +320,7 @@ function dsj_rwzt() {
                     for (let index = 0; index < data.data.length; index++) {
                         const task = data.data[index];
 						console.log(task);
-                        subTitle+=task
+
                         const finish = task.dayCompCount == task.dayDoCountMax;
 
                         switch (task.code) {
