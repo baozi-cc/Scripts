@@ -54,8 +54,15 @@ const $ = new Env("GLaDOS");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const signcookie = "evil_gladoscookie";
 
-var sicookie = process.env.gladoscookie;
-var sicookie_edu = process.env.gladoscookie_edu;
+var gladosCookie =[]
+if($.isNode()){ //node环境
+
+  gladosCookie=process.env.gladoscookie.split('#');
+
+}
+
+//var sicookie = $.isNode() ?process.env.gladoscookie :$.getdata('sicookie');
+//var sicookie_edu =  $.isNode() ?process.env.gladoscookie_edu:$.getdata('sicookie_edu');
 var account;
 var expday;
 var remain;
@@ -63,7 +70,7 @@ var remainday;
 var change;
 var changeday;
 var msge;
-
+var message="";
 
 !(async () => {
   if (typeof $request != "undefined") {
@@ -71,21 +78,22 @@ var msge;
     return;
   }
 
-  $.message = "";
-  $.message_sign ="";
-  $.message_flows="";
-  await signin(sicookie);
-  await get_flows(sicookie);
-  await status(sicookie);
-  $.message=$.message+'\n'
-  $.message_flows=" "//清空get_flows里的消息
-  $.message_sign=" "//清空chekin里的消息
-  
-  await signin(sicookie_edu);
-  await get_flows(sicookie_edu);
-  await status(sicookie_edu);
-  
-  await notify.sendNotify($.name, $.message);
+  for(let i=0;i<gladosCookie.length;i++){
+     sicookie=gladosCookie[i];
+	 $.log(sicookie)
+     $.message_sign ="";
+     $.message_flows="";
+     await signin(sicookie);
+     await get_flows(sicookie);
+     await status(sicookie);
+     message=message+'\n'
+     $.message_flows=""//清空get_flows里的消息
+     $.message_sign=""//清空chekin里的消息
+	 $.sicookie=""
+  }
+       
+  $.msg("GLaDOS签到开始！", message);
+  await notify.sendNotify($.name, message);
 })()
   .catch((e) => {
     $.log("", `❌失败! 原因: ${e}!`, "");
@@ -96,13 +104,14 @@ var msge;
   
 
 
-function signin(sicookie) {
+//签到
+function signin(cookie) {
   return new Promise((resolve) => {
     const header = {
       Accept: `application/json, text/plain, */*`,
       Origin: `https://glados.rocks`,
       "Accept-Encoding": `gzip, deflate, br`,
-      Cookie: sicookie,
+      Cookie: cookie,
       "Content-Type": `application/json;charset=utf-8`,
       Host: `glados.rocks`,
       Connection: `keep-alive`,
@@ -145,11 +154,13 @@ function signin(sicookie) {
   });
 }
 
-function status(sicookie) {
+
+//状态
+function status(cookie) {
   return new Promise((resolve) => {
     const statusRequest = {
       url: "https://glados.rocks/api/user/status",
-      headers: { Cookie: sicookie },
+      headers: { Cookie: cookie },
     };
     $.get(statusRequest, (error, response, data) => {
       var body = response.body;
@@ -159,11 +170,10 @@ function status(sicookie) {
         expday = obj.data.days;
         remain = obj.data.leftDays;
         remainday = parseInt(remain);
-        $.message += `账户：${account}\n`
-        $.message += `已用${expday}天,剩余${remainday}天\n`;
-        $.message +=$.message_flows
-        $.message +=$.message_sign
-        $.msg("GLaDOS", `账户：${account}`, $.message);
+        message += `账户：${account}\n`
+        message += `已用${expday}天,剩余${remainday}天\n`;
+        message +=$.message_flows
+        message +=$.message_sign
       } else {
         $.log(response);
         $.msg("GLaDOS", "", "❌请重新登陆更新Cookie");
@@ -172,6 +182,8 @@ function status(sicookie) {
     });
   });
 }
+
+//获取流量清空
 function get_flows(cookie){
   return new Promise((resolve) => {
     const usageRequest = {
@@ -208,6 +220,8 @@ function get_flows(cookie){
 
 
 }
+
+//获取ck
 function getCookie() {
     if (
       $request &&
@@ -219,7 +233,12 @@ function getCookie() {
       $.setdata(sicookie, signcookie);
       $.msg("GLaDOS", "", "获取签到Cookie成功🎉");
     }
-  }
+}
+
+
+
+
+
 
 //From chavyleung's Env.js
 function Env(name, opts) {
