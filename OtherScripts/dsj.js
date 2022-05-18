@@ -1,4 +1,3 @@
-
 const $ = new Env("电视家");
 const notify = $.isNode() ? require('./sendNotify') : '';
 message = ""
@@ -220,6 +219,7 @@ function total() {
         }, (error, response, data) => {
             let result = JSON.parse(data)
             console.log(`\n【当前金币状态】待兑换金币: ${result.data.coin}`)
+			subTitle+=`\n【当前金币状态】待兑换金币: ${result.data.coin}`
             try {
                 if (result.data.tempCoin) {
                     for (i = 0; i < result.data.tempCoin.length; i++) {
@@ -261,8 +261,10 @@ function wx_dotask(code) {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log('\n【微信任务代码】：' + code + '，获得金币:' + result.data.getCoin)
+				subTitle+='\n【微信任务代码】：' + code + '，获得金币:' + result.data.getCoin
             } else {
                 console.log('\n【微信任务代码】: ' + code + '，' + result.msg)
+				subTitle+='\n【微信任务代码】: ' + code + '，' + result.msg
             }
             resolve()
         })
@@ -291,8 +293,10 @@ function dotask(code) {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log('\n【任务代码】：' + code + '，获得金币:' + result.data.getCoin)
+				subTitle+='\n【任务代码】：' + code + '，获得金币:' + result.data.getCoin
             } else {
                 console.log('\n【任务代码】: ' + code + '，' + result.msg)
+				subTitle+='\n【任务代码】: ' + code + '，' + result.msg
             }
             resolve()
         })
@@ -316,6 +320,7 @@ function dsj_rwzt() {
                     for (let index = 0; index < data.data.length; index++) {
                         const task = data.data[index];
 						console.log(task);
+                        subTitle+=task
                         const finish = task.dayCompCount == task.dayDoCountMax;
 
                         switch (task.code) {
@@ -362,6 +367,7 @@ function dsj_rwzt() {
                     // }
                 } else {
                     console.log(data)
+					subTitle+=data
                 }
 
             } catch (e) {
@@ -383,8 +389,10 @@ function video() {
                 const result = JSON.parse(data)
                 if (result.errCode === 0) {
                     console.log(`\n【看视频赚钱】:获得 ${result.data.getCoin} 金币`)
+					subTitle+=`\n【看视频赚钱】:获得 ${result.data.getCoin} 金币`
                 } else {
                     console.log(`\n【看视频赚钱】: ${result.msg}`)
+					subTitle+=`\n【看视频赚钱】: ${result.msg}`
                 }
 
             } catch (e) {
