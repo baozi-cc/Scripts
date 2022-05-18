@@ -80,7 +80,7 @@ var message="";
 
   for(let i=0;i<gladosCookie.length;i++){
      sicookie=gladosCookie[i];
-	 $.log(sicookie)
+     $.log(sicookie)
      $.message_sign ="";
      $.message_flows="";
      await signin(sicookie);
