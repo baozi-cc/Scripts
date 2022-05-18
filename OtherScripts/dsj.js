@@ -101,6 +101,7 @@ function getHeader(account) {
             current_reward_id = accounts[k].rewardId
         }
         console.log(`--------第 ${k + 1} 个账号任务中--------\n`)
+        await dsj_getinfo()// 用户信息
 
         await dsj_rwzt();
         await signin()
@@ -110,14 +111,12 @@ function getHeader(account) {
         await run_rw()
 
         await dsj_lqp()
-        // for (let k = 0; k < 5; k++) {
-        //     await lhz()
-        //     await $.wait(60000)
-        // }
+
         await tasks(); // 任务状态
         await wx_tasks()
         await getGametime(); // 游戏时长
-        await dsj_getinfo()// 用户信息
+        
+
         //await coinlist(); //总计
         //await total(); // 金币状态
         await cash(); // 现金状态
@@ -135,9 +134,8 @@ function getHeader(account) {
 //总计
 function coinlist() {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
             let url = {
-                url: `http://${dianshijia_API}/coin/detail`,
+                url: `http://${dianshijia_API}/coin/info`,
                 headers: JSON.parse(current_dsj_header),
             }
             $.get(url, (error, response, data) => {
@@ -151,6 +149,7 @@ function coinlist() {
                     for (i = 0; i < result.data.length && result.data[i].ctime >= time; i++) {
                         if (result.data[i].from == "领取走路金币") {
                             detail += `【走路任务】✅ 获得金币` + result.data[i].amount + '\n'
+
                         }
                         if (result.data[i].from == "领取睡觉金币") {
                             detail += `【睡觉任务】✅ 获得金币` + result.data[i].amount + '\n'
@@ -202,13 +201,13 @@ function coinlist() {
                     console.log(`获取任务金币列表失败，错误代码${e}+ \n响应数据:${data}`)
                     //$.msg($.name + ` 获取金币详情失败 `, subTitle, detail)
                 }
-                /*if ($.isNode()) {
+                if ($.isNode()) {
                     notify.sendNotify(`【${$.name}】账号 ${i} , ${subTitle} '\n' ${detail}`)
                 }
-                return*/
+                return
                 resolve()
             })
-        }, 1000)
+        
     })
 }
 
@@ -411,6 +410,7 @@ function signin() {
             if (result.errCode == 0) {
                 //signinres = `\n签到成功 `
                 console.log(`\n【签到收益】: ${result.data.reward[0].count} 金币 `)
+				subTitle=subTitle+`\n【签到收益】: ${result.data.reward[0].count} 金币 `
                 /*var h = result.data.reward.length
                 if (h > 1) {
                     dconsole.log( `\n【签到收益】` + signinres + `${result.data.reward[0].count}金币，奖励${result.data.reward[1].name} `)
@@ -419,6 +419,7 @@ function signin() {
                 }*/
             } else if (result.errCode == 4) {
                 console.log(`\n【签到结果】 重复签到 🔁 `)
+				subTitle+=`\n【签到结果】 重复签到 🔁 `
             } else if (result.errCode == 6) {
                 console.log(`\n【签到结果】 失败`)
                 //detail = `\n原因: ${result.msg}`
@@ -497,6 +498,7 @@ function sleep() {
                 $.msg($.name, `睡觉结果: 失败`, `说明: ${e}`)
             }
             console.log(`\n【睡觉任务】: ${sleeping}`)
+			subTitle+=`\n【睡觉任务】: ${sleeping}`
             resolve()
         })
     })
@@ -514,6 +516,7 @@ function CarveUp() {
             if (result.errCode == 0) {
                 //detail += `【金币瓜分】✅ 报名成功\n`
                 $.log(`金币瓜分】✅ 报名成功\n`)
+				subTitle+=`金币瓜分】✅ 报名成功\n`
             }
             resolve()
         })
@@ -529,6 +532,7 @@ function getCUpcoin() {
         }, (error, response, data) => {
             //console.log(data)
             $.log(`【瓜分百万金币】: 获得 ${data} 金币`)
+			subTitle+=`【瓜分百万金币】: 获得 ${data} 金币`
         })
         resolve()
     })
@@ -542,6 +546,7 @@ function walk() {
         }
         $.get(url, (error, response, data) => {
             $.log(`走路任务: ${data}\n`)
+			subTitle+=`走路任务: ${data}\n`
             let result = JSON.parse(data)
             if (result.data.unGetCoin > 10) {
                 $.get({
@@ -562,6 +567,7 @@ function wakeup() {
         }
         $.get(url, (error, response, data) => {
             $.log(`睡觉打卡: ${data}\n`)
+			subTitle+=`睡觉打卡: ${data}\n`
         })
         resolve()
     })
@@ -628,8 +634,10 @@ function dsj_ggz() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【浏览广告赚】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【浏览广告赚】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【浏览广告赚】: ${result.msg}`)
+				subTitle+=`\n【浏览广告赚】: ${result.msg}`
             }
             resolve()
         })
@@ -648,8 +656,10 @@ function dsj_jrydz() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【播放任务】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【播放任务】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【播放任务】: ${result.msg}`)
+				subTitle+=`\n【播放任务】: ${result.msg}`
             }
             resolve()
         })
@@ -668,8 +678,10 @@ function dsj_sjbfx() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【手机版分享】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【手机版分享】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【手机版分享】: ${result.msg}`)
+				subTitle+=`\n【手机版分享】: ${result.msg}`
             }
             resolve()
         })
@@ -689,8 +701,10 @@ function dsj_dgt() {
             //console.log(`\n【今日阅读赚】: 成功`)
             if (result.errCode == 0) {
                 console.log(`\n【访问点歌台】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【访问点歌台】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【访问点歌台】: ${result.msg}`)
+				subTitle+=`\n【访问点歌台】: ${result.msg}`
             }
 
             resolve()
@@ -710,8 +724,10 @@ function dsj_fwxc() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【访问相册】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【访问相册】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【访问相册】: ${result}`)
+				subTitle+=`\n【访问相册】: ${result}`
             }
 
             resolve()
@@ -731,8 +747,10 @@ function dsj_xcsds() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【相册上电视】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【相册上电视】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【相册上电视】: ${result.msg}`)
+				subTitle+=`\n【相册上电视】: ${result.msg}`
             }
 
             resolve()
@@ -751,8 +769,10 @@ function dsj_kjth() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【开家庭号】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【开家庭号】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【开家庭号】: ${result.msg}`)
+				subTitle+=`\n【开家庭号】: ${result.msg}`
             }
 
             resolve()
@@ -772,8 +792,10 @@ function dsj_sdsp() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log(`\n【刷短视频】:获得 ${result.data.getCoin} 金币`)
+				subTitle+=`\n【刷短视频】:获得 ${result.data.getCoin} 金币`
             } else {
                 console.log(`\n【刷短视频】: ${result.msg}`)
+				subTitle+=`\n【刷短视频】: ${result.msg}`
             }
 
             resolve()
@@ -795,6 +817,7 @@ function dsj_lqp() {
             if (result.errCode == 0) {
                 if (!result.data.tempCoin) {
                     console.log(`\n【${$.name}】: 首页没有气泡了`)
+					subTitle+=`\n【${$.name}】: 首页没有气泡了`
                 } else {
                     for (let a = 0; a < result.data.tempCoin.length; a++) {
                         await dsj_dqp(result.data.tempCoin[a].id)
@@ -825,6 +848,7 @@ function dsj_dqp(code) {
             //console.log(data)
             let result = JSON.parse(data)
             console.log(`\n【${$.name}】: 点气泡成功`)
+			subTitle+=`\n【${$.name}】: 点气泡成功`
             resolve()
         })
     })
@@ -839,6 +863,7 @@ function getGametime() {
         }
         $.get(url, (error, response, data) => {
             $.log(`游戏时长: ${data}\n`)
+			subTitle+=`游戏时长: ${data}\n`
         })
         resolve()
     })
@@ -856,9 +881,11 @@ function dsj_getinfo() {
             if (result.errCode == 0) {
                 nickname = result.data.nickname
                 headImgUrl = result.data.headImgUrl
-                dsj_info()
+				subTitle+=`【用户昵称】: ${nickname}`
+                //dsj_info()
             } else {
                 console.log(`\n【电视家提示】: ${result.msg}`)
+				subTitle+=`\n【电视家提示】: ${result.msg}`
             }
 
             resolve()
@@ -954,8 +981,10 @@ function lhz() {
             let result = JSON.parse(data)
             if (result.errCode == 0) {
                 console.log('\n阅读零花赚：' + '阅读次数:' + result.data.dayCompCount)
+				subTitle+='\n阅读零花赚：' + '阅读次数:' + result.data.dayCompCount
             } else {
                 console.log('\n【阅读零花赚: ' + result.msg)
+				subTitle+='\n【阅读零花赚: ' + result.msg
             }
             resolve()
         })
