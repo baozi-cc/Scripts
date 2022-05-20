@@ -61,7 +61,7 @@ else:
 if 'JD_COOKIE' in os.environ:
     ori_cookies =os.environ["JD_COOKIE"].split('&')
 else:
-    ori_cookies =['' ]
+    ori_cookies =['']
 if len(ori_cookies)==0:
     logger.info("未发现cookie")
     sys.exit(0)
@@ -163,9 +163,11 @@ def qiang_quan(cookie, i):
     try:
         res = requests.post(url=url, headers=headers, data=data).json()
         if res['code'] == '0':
-            logger.info(res['subCodeMsg'])
+            jd_cookie_pin=re.findall(r"pt_pin.*?;",cookie)
+            message='账号:{0}   时间:{1}   结果:{2}'.format(jd_cookie_pin[0],time.time(),res['subCodeMsg'])
+            logger.info(message)
             if res['subCodeMsg']=='领取成功！感谢您的参与，祝您购物愉快~':
-                send('🔔京东极速版抢券!',res['subCodeMsg'])
+                send('🔔京东极速版抢券!',message)
                 sys.exit(0)
             if res['subCodeMsg'].find('抢完'):
                 sys.exit(0)
@@ -226,6 +228,7 @@ if __name__ == '__main__':
             if int(time.time()*1000) - atime >= 1000:
                 atime = int(time.time()*1000)
                 logger.info(f'还差{int((starttime - int(time.time()*1000)) / 1000)}秒!')   
+
 
     logger.info('抢券开始喽!!')
     while True:
