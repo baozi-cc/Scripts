@@ -79,7 +79,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
     }
   }
-  await notify.sendNotify(`饿了么吃货豆`, `${allMessage}`, '')
+  //await notify.sendNotify(`饿了么吃货豆`, `${allMessage}`, '')
   $.msg($.name, "",`${allMessage}`)
 
 })()
