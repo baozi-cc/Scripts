@@ -28,13 +28,16 @@ function updateCookie(cookie, TGUserID) {
           data = JSON.parse(data);
           if (data.ok) {
             console.log(`已发送 wskey(${cookie}) 至 ${TGUserID}🎉\n`);
-            $.resData = `已发送 wskey(${cookie}) 至 ${TGUserID}🎉`;
+            const resData = `已发送 wskey(${cookie}) 至 ${TGUserID}🎉`;
+            $.msg(`${resData}`,``)
           } else if (data.error_code === 400) {
             console.log(`发送失败，请联系 ${TGUserID}。\n`);
-            $.resData = `发送失败，请联系 ${TGUserID}。`;
+            resData = `发送失败，请联系 ${TGUserID}。`;
+            $.msg(`${resData}`,``)
           } else if (data.error_code === 401) {
             console.log(`${TGUserID} bot token 填写错误。\n`);
-            $.resData = `${TGUserID} bot token 填写错误。`;
+            resData = `${TGUserID} bot token 填写错误。`;
+            $.msg(`${resData}`,``)
           }
         }
       } catch (e) {
@@ -56,9 +59,9 @@ const Cookie = $request.headers['Cookie']
      const pt_key="pt_key="+Cookie.match(/pt_key=(.+?);/)[1];
      const jdCookie = pt_key+" "+pt_pin;
      $.log(`[${jsname}] 获取jdCookie请求: 成功🎉,jdCookie: ${jdCookie}`)
-     $.msg(`获取jdCookie: 成功🎉 \n ${jdCookie}`, ``)
+     $.msg(`获取jdCookie: 成功🎉`, ``)
      for (const userId of $.TGUserIDs) {
-         updateCookie(jdCookie, userId);
+         updateCookie(jdCookie, userId);  
      }
 }
 
