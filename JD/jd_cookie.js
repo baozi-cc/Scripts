@@ -109,20 +109,7 @@ if($request&&$request.url.indexOf("recommendGetWay")>=0) {
      
      const cacheValue = JSON.stringify(updateCookiesData, null, `\t`)
      $.write(cacheValue, CacheKey)
-     updateJDHelp(DecodeName)
 
-     if ($.mute === 'true') {
-        return console.log(
-          '用户名: ' + DecodeName + tipPrefix + CookieName + 'Cookie成功 🎉'
-        )
-     }
-     $.notify(
-        '用户名: ' + DecodeName,
-        '',
-        tipPrefix + CookieName + 'Cookie成功 🎉',
-        { 'update-pasteboard': CookieValue }
-     )
-    
   
   
 }
