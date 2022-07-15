@@ -10,8 +10,8 @@ const $ = new API('ql', false)
 const CacheKey = `#${APIKey}`
 
 
-const _TGUserID = JSON.parse($.read('#CreamK_TG_User_ID'));
-const _TGBotToken = JSON.parse($.read('#CreamK_TG_Bot_Token'));
+const _TGUserID = $.read('#CreamK_TG_User_ID');
+const _TGBotToken = $.read('#CreamK_TG_Bot_Token');
 
 $.TGBotToken = _TGBotToken;
 $.TGUserIDs = [];
