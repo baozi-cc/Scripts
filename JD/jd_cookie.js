@@ -1,7 +1,5 @@
-const jsname='JD获取ck'
-const $ = Env(jsname)
-
 const APIKey = 'CookiesJD' //需要更新的cookie名称
+const $ = new API('ql', false)
 const CacheKey = `#${APIKey}`
 
 const jdHelp = JSON.parse($.read('#jd_ck_remark') || '{}')
