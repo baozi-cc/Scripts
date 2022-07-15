@@ -9,6 +9,47 @@ const APIKey = 'CookiesJD'
 const $ = new API('ql', false)
 const CacheKey = `#${APIKey}`
 
+
+const _TGUserID = $.getData('CreamK_TG_User_ID');
+const _TGBotToken = $.getData('CreamK_TG_Bot_Token');
+
+$.TGBotToken = _TGBotToken;
+$.TGUserIDs = [];
+if (_TGUserID) {
+  $.TGUserIDs.push(_TGUserID);
+}
+
+//tg通知
+function updateCookie(cookie, TGUserID) {
+  const opt = {
+    url: `https://api.telegram.org/bot${$.TGBotToken}/sendMessage`,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `chat_id=${TGUserID}&text=${cookie}&disable_web_page_preview=true`, 
+  }
+  return $.http.post(opt).then((response) => {
+    try {
+      data=response.data
+      data = JSON.parse(data);
+      if (data.ok) {
+         console.log(`已发送 wskey(${cookie}) 至 ${TGUserID}🎉\n`);
+        
+      } else if (data.error_code === 400) {
+         console.log(`发送失败，请联系 ${TGUserID}。\n`);
+         
+      } else if (data.error_code === 401) {
+         console.log(`${TGUserID} bot token 填写错误。\n`);
+        
+     }
+    } catch (e) {
+      return false
+    }
+  })}
+
+
+
+
 const jdHelp = JSON.parse($.read('#jd_ck_remark') || '{}')
 let remark = []
 try {
@@ -129,6 +170,9 @@ async function GetCookie() {
     if (CV.match(/(pt_key=.+?pt_pin=|pt_pin=.+?pt_key=)/)) {
       const CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/)
       if (CookieValue.indexOf('fake_') > -1) return console.log('异常账号')
+      for (const userId of $.TGUserIDs) {
+         updateCookie(CookieValue, userId);
+      }
       const DecodeName = getUsername(CookieValue)
       let updateIndex = null,
         CookieName,
