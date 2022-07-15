@@ -1,7 +1,7 @@
 const jsname='JD获取ck'
 const $ = Env(jsname)
 //jd金融
-if($request&&$request.url.indexOf("firstScreenNew")>=0) {
+if($request&&$request.url.indexOf("btJrFirstScreen")>=0) {
 const jdCookie = $request.headers['cookies']
      $.log(`[${jsname}] 获取jdCookie请求: 成功🎉,jdCookie: ${jdCookie}`)
      $.msg(`获取jdCookie: 成功🎉`, ``)
