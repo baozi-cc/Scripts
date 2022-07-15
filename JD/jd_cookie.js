@@ -1,7 +1,7 @@
 const jsname='JD获取ck'
 const $ = Env(jsname)
 //jd金融
-if($request&&$request.url.indexOf("recommendGetWay")>=0||$request.url.indexOf("btJrFirstScreen")>=0) {
+if($request&&$request.url.indexOf("recommendGetWay")>=0) {
 const cookies = $request.headers['Cookie']
      const cookie = [];
      cookies['forEach']((item) => {
