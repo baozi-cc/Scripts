@@ -77,38 +77,6 @@ if($request&&$request.url.indexOf("recommendGetWay")>=0) {
     }
   
   
-    const DecodeName = getUsername(jdCookie) //编码后的pin
-    let updateIndex = null,
-        CookieName,
-        tipPrefix
-
-    const CookiesData = getCache() //获取qx中的变量
-    const updateCookiesData = [...CookiesData] //浅拷贝
-
-    CookiesData.forEach((item, index) => {
-        if (getUsername(item.cookie) === DecodeName) 
-          updateIndex = index
-    })
-
-    if (updateIndex !== null) { //非新cookie
-        const response = await TotalBean(updateCookiesData[updateIndex].cookie)
-        if (response && response.retcode === '0')
-            return console.log('cookie 未过期，无需更新')
-        updateCookiesData[updateIndex].cookie = jdCookie
-        CookieName = '【账号' + (updateIndex + 1) + '】'
-        tipPrefix = '更新京东'
-     } else {//新cookie
-        updateCookiesData.push({
-          userName: DecodeName,
-          cookie: jdCookie,
-        })
-        CookieName = '【账号' + updateCookiesData.length + '】'
-        tipPrefix = '首次写入京东'
-     }
-     
-     const cacheValue = JSON.stringify(updateCookiesData, null, `\t`)
-     $.write(cacheValue, CacheKey)
-  
   
 }
 
