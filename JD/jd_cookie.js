@@ -2,16 +2,10 @@ const jsname='JD获取ck'
 const $ = Env(jsname)
 //jd金融
 if($request&&$request.url.indexOf("recommendGetWay")>=0) {
-const cookies = $request.headers['Cookie']
-     const cookie = [];
-     cookies['forEach']((item) => {
-	const value = `${item['name']}=${item['value']}`;
-	if (item['name'] === 'pt_key') cookie['push'](value);
-	if (item['name'] === 'pt_pin') {
-		cookie['push'](value + ';')
-	}
-     });
-     jdCookie = cookie['join'](';');
+const Cookie = $request.headers['Cookie'].
+     pt_pin=Cookie.match(/pt_pin=(.+?);/)[1];
+     pt_key=Cookie.match(/pt_key=(.+?);/)[1];
+     jdCookie = pt_key+pt_pin;
      $.log(`[${jsname}] 获取jdCookie请求: 成功🎉,jdCookie: ${jdCookie}`)
      $.msg(`获取jdCookie: 成功🎉`, ``)
      $.msg(`${jdCookie}`, ``)
