@@ -2,7 +2,7 @@ const jsname='JD获取ck'
 const $ = Env(jsname)
 //jd金融
 if($request&&$request.url.indexOf("recommendGetWay")>=0) {
-const Cookie = $request.headers['Cookie'].
+const Cookie = $request.headers['Cookie']
      pt_pin=Cookie.match(/pt_pin=(.+?);/)[1];
      pt_key=Cookie.match(/pt_key=(.+?);/)[1];
      jdCookie = pt_key+pt_pin;
