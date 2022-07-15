@@ -3,9 +3,9 @@ const $ = Env(jsname)
 //jd金融
 if($request&&$request.url.indexOf("recommendGetWay")>=0) {
 const Cookie = $request.headers['Cookie']
-     pt_pin=Cookie.match(/pt_pin=(.+?);/)[1];
-     pt_key=Cookie.match(/pt_key=(.+?);/)[1];
-     jdCookie = pt_key+pt_pin;
+     const pt_pin=Cookie.match(/pt_pin=(.+?);/)[1];
+     const pt_key=Cookie.match(/pt_key=(.+?);/)[1];
+     const jdCookie = pt_key+" "+pt_pin;
      $.log(`[${jsname}] 获取jdCookie请求: 成功🎉,jdCookie: ${jdCookie}`)
      $.msg(`获取jdCookie: 成功🎉`, ``)
      $.msg(`${jdCookie}`, ``)
