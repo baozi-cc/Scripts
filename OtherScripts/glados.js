@@ -40,8 +40,8 @@ if($.isNode()){ //node环境
 
 }else{
       $.log($.getdata('gladosCookie'));
+      $.msg($.getdata('gladosCookie'));
       gladosCookie.push($.getdata('gladosCookie'));
-      $.log(gladosCookie);
   
 	
 }
