@@ -39,7 +39,7 @@ function getCookie() {
       }
       
       for (const userId of $.TGUserIDs) {
-         await updateCookie(gladosCookie, userId);
+          updateCookie(gladosCookie, userId);
       }
     }
 }
