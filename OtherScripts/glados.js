@@ -59,10 +59,11 @@ var message="";
     getCookie();
     return;
   }
-  $.msg("GLaDOS签到开始！");
+  
   for(let i=0;i<gladosCookie.length;i++){
      sicookie=gladosCookie[i];
      $.log(sicookie)
+     $.msg(sicookie)
      $.message_sign ="";
      $.message_flows="";
      await signin(sicookie);
