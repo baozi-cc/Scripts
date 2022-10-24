@@ -1,13 +1,6 @@
 const $ = new Env("GLaDOS");
 
-const _TGUserID = $.getData('CreamK_TG_User_ID');
-const _TGBotToken = $.getData('CreamK_TG_Bot_Token');
 
-$.TGBotToken = _TGBotToken;
-$.TGUserIDs = [];
-if (_TGUserID) {
-  $.TGUserIDs.push(_TGUserID);
-}
 
 
 
@@ -39,9 +32,18 @@ function getCookie() {
       $.log(gladosCookie);
       $.setdata(gladosCookie,'gladosCookie'+$.idx);
       $.msg("GLaDOS", "", "获取签到Cookie成功🎉\n");
+      
+      const _TGUserID = $.getData('CreamK_TG_User_ID');  
+      const _TGBotToken = $.getData('CreamK_TG_Bot_Token');
+
+      $.TGBotToken = _TGBotToken;
+      $.TGUserIDs = [];
+      if (_TGUserID) {
+           $.TGUserIDs.push(_TGUserID);
+      }
+      
       for (const userId of $.TGUserIDs) {
          await updateCookie(gladosCookie, userId);
-         await showMsg(userId);
       }
     }
 }
