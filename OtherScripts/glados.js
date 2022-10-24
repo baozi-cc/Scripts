@@ -82,8 +82,8 @@ var message="";
      $.sicookie=""
   }
   
-  $.msg=message;
-  $.msg("GLaDOS签到开始！", $.msg);
+  $.message=message;
+  $.msg("GLaDOS签到开始！", $.message);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
