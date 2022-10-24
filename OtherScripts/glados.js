@@ -4,7 +4,7 @@
 
 【修改内容】调整输出格式
           适配多账号
-	  适配青龙
+	  适配青龙、qx
 
 【BoxJs】https://raw.githubusercontent.com/CreamK/Scripts/main/creamk.box.json
  Boxjs中填入ck和ck数量！！！！！
