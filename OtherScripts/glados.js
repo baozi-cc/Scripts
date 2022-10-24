@@ -28,6 +28,8 @@
 
 使用建议：先购买一个月会员，获得30天的basic套餐和签到续命的权限，用教育邮箱认证延长365天的使用权限，然后使用本脚本
 
+【qx获取cookie】填入重写 https://raw.githubusercontent.com/CreamK/Scripts/main/QuantumultX/getCookie_glados.conf
+
 */
 
 const $ = new Env("GLaDOS");
