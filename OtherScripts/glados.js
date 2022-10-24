@@ -69,12 +69,10 @@ var message="";
      await get_flows(sicookie);
      await status(sicookie);
      message=message+'\n'
-    
      $.message_flows=""//清空get_flows里的消息
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
   }
-  $.msg("GLaDOS签到开始！","",message);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
