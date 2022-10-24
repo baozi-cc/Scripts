@@ -39,9 +39,10 @@ if($.isNode()){ //node环境
   gladosCookie=process.env.gladosCookie.split('#');
 
 }else{
-      $.log($.getdata('gladosCookie'));
-      $.msg($.getdata('gladosCookie'));
-      gladosCookie.push($.getdata('gladosCookie'));
+      if ($.getdata('gladosCookie')){
+         gladosCookie.push($.getdata('gladosCookie'));
+      }
+  
   
 	
 }
@@ -63,8 +64,6 @@ var message="";
   
   for(let i=0;i<gladosCookie.length;i++){
      sicookie=gladosCookie[i];
-     $.log(sicookie)
-     $.msg(sicookie)
      $.message_sign ="";
      $.message_flows="";
      await signin(sicookie);
@@ -75,6 +74,7 @@ var message="";
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
   }
+  $.msg(message);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
