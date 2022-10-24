@@ -126,7 +126,7 @@
     {
       "id": "Glados",
       "name": "Glados签到",
-      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","gladosCookie","gladosCookie2","gladosCookie3"],
+      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","gladosCookie","gladosCookie2","gladosCookie3","gladosCount","currentGladosCount"],
       "settings": [
         {
           "id": "CreamK_TG_User_ID",
@@ -160,14 +160,13 @@
         },
         {
          "id": "gladosCount",
-          "name": "账号数量",
+          "name": "gladosCount",
           "val": "",
           "type": "number"
-        }
-        ,
+        },
         {
          "id": "currentGladosCount",
-          "name": "当前账号,1开始",
+          "name": "currentGladosCount",
           "val": "",
           "type": "number"
         }
