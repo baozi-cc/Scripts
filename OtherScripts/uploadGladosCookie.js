@@ -26,7 +26,7 @@ function getCookie() {
       let currentCount = $.getdata('currentGladosCount');
       $.log(gladosCookie);
       $.setdata(gladosCookie,gladosCookie${currentCount});
-      $.msg("GLaDOS", "", "获取签到Cookie成功🎉\ngladosCookie");
+      $.msg("GLaDOS", "", "获取签到Cookie成功🎉\n");
     }
 }
 
