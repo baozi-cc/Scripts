@@ -1,9 +1,5 @@
 const $ = new Env("GLaDOS");
 
-
-
-
-
 !(async () => {
   if (typeof $request != "undefined") {
     getCookie();
@@ -33,8 +29,8 @@ function getCookie() {
       $.setdata(gladosCookie,'gladosCookie'+$.idx);
       $.msg("GLaDOS", "", "获取签到Cookie成功🎉\n");
       
-      const _TGUserID = $.getData('CreamK_TG_User_ID');  
-      const _TGBotToken = $.getData('CreamK_TG_Bot_Token');
+      const _TGUserID = $.getdata('CreamK_TG_User_ID');  
+      const _TGBotToken = $.getdata('CreamK_TG_Bot_Token');
 
       $.TGBotToken = _TGBotToken;
       $.TGUserIDs = [];
