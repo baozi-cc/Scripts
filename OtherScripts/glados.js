@@ -81,8 +81,9 @@ var message="";
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
   }
-       
-  $.msg("GLaDOS签到开始！", message);
+  
+  $.msg=message;
+  $.msg("GLaDOS签到开始！", $.msg);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
