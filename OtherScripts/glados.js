@@ -164,10 +164,12 @@ function status(cookie) {
         remain = obj.data.leftDays;
         remainday = parseInt(remain);
         message += `账户：${account}\n`
+	$.msg("GLaDOS签到开始！",`账户：${account}\n`);
         message += `已用${expday}天,剩余${remainday}天\n`;
+	$.msg("GLaDOS签到开始！",`已用${expday}天,剩余${remainday}天\n`);
         message +=$.message_flows
         message +=$.message_sign
-	$.msg("GLaDOS签到开始！",message);
+	
       } else {
         $.log(response);
         $.msg("GLaDOS", "", "❌请重新登陆更新Cookie");
