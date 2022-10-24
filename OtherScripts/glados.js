@@ -35,7 +35,7 @@ const signcookie = "evil_gladoscookie";
 var gladosCookie =[]
 if($.isNode()){ //node环境
 	
-  gladosCookie=process.env.gladoscookie.split('#');
+  gladosCookie=process.env.gladosCookie.split('#');
 
 }else{
   if ($.getdata('gladosCookie')){
