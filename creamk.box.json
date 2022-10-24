@@ -157,7 +157,21 @@
           "name": "存储gladosCookie",
           "val": "",
           "type": "text"
+        },
+        {
+         "id": "gladosCount",
+          "name": "账号数量",
+          "val": "",
+          "type": "number"
         }
+        ,
+        {
+         "id": "currentGladosCount",
+          "name": "当前账号,1开始",
+          "val": "",
+          "type": "number"
+        }
+        
       ],
       "script": "https://raw.githubusercontent.com/CreamK/Scripts/main/OtherScripts/glados.js",
       "author": "@creamk",
