@@ -23,9 +23,9 @@ function getCookie() {
       $request.url.match(/checkin/)
     ) {
       const gladosCookie = $request.headers["Cookie"];
-      let currentCount = $.getdata('currentGladosCount');
+      $.idx = $.getdata('currentGladosCount');
       $.log(gladosCookie);
-      $.setdata(gladosCookie,`gladosCookie${currentCount}`);
+      $.setdata(gladosCookie,gladosCookie+$.idx);
       $.msg("GLaDOS", "", "获取签到Cookie成功🎉\n");
     }
 }
