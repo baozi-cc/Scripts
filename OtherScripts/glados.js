@@ -3,7 +3,8 @@
 【GLaDOS】修改@CreamK
 
 【修改内容】调整输出格式
-          多账号
+          适配多账号
+	  适配青龙
 
 【BoxJs】
 
@@ -67,7 +68,7 @@ var message="";
     getCookie();
     return;
   }
-
+  $.msg("GLaDOS签到开始！");
   for(let i=0;i<gladosCookie.length;i++){
      sicookie=gladosCookie[i];
      $.log(sicookie)
@@ -81,9 +82,7 @@ var message="";
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
   }
-  
-  $.message=message;
-  $.msg("GLaDOS签到开始！", $.message);
+  $.msg(message);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
