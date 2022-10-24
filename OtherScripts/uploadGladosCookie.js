@@ -1,3 +1,4 @@
+const $ = new Env("GLaDOS");
 !(async () => {
   if (typeof $request != "undefined") {
     getCookie();
