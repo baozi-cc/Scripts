@@ -79,11 +79,14 @@ var message="";
      message=message+'\n'
      $.message_flows=""//清空get_flows里的消息
      $.message_sign=""//清空chekin里的消息
-	 $.sicookie=""
+     $.sicookie=""
   }
        
   $.msg("GLaDOS签到开始！", message);
-  await notify.sendNotify($.name, message);
+  if ($.isNode()){
+      await notify.sendNotify($.name, message);
+  }
+  
 })()
   .catch((e) => {
     $.log("", `❌失败! 原因: ${e}!`, "");
