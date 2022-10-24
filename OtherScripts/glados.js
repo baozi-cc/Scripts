@@ -39,11 +39,8 @@ if($.isNode()){ //node环境
   gladosCookie=process.env.gladosCookie.split('#');
 
 }else{
-      if ($.getdata('gladosCookie')){
-         gladosCookie.push($.getdata('gladosCookie'));
-      }
-  
-  
+      
+     gladosCookie.push($.getdata('gladosCookie'));
 	
 }
 
