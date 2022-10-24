@@ -164,9 +164,9 @@ function status(cookie) {
         remain = obj.data.leftDays;
         remainday = parseInt(remain);
         message += `账户：${account}\n`
-	$.msg("GLaDOS签到开始！",`账户：${account}\n`);
+	$.msg("GLaDOS",`账户：${account}`);
         message += `已用${expday}天,剩余${remainday}天\n`;
-	$.msg("GLaDOS签到开始！",`已用${expday}天,剩余${remainday}天\n`);
+	$.msg("GLaDOS",`已用${expday}天,剩余${remainday}天`);
         message +=$.message_flows
         message +=$.message_sign
 	
@@ -205,6 +205,7 @@ function get_flows(cookie){
         }
         $.sum=$.sum/1000000000
         $.message_flows=`本月已经使用${$.sum} G流量\n`
+	$.msg("GLaDOS",$.message_flows);
       } else {
         $.log(response);
         $.msg("GLaDOS", "", "❌请重新登陆更新Cookie");
