@@ -78,11 +78,11 @@ var message="";
      await get_flows(sicookie);
      await status(sicookie);
      message=message+'\n'
+     $.msg(message);
      $.message_flows=""//清空get_flows里的消息
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
   }
-  $.msg(message);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
