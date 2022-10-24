@@ -1,4 +1,16 @@
 const $ = new Env("GLaDOS");
+
+const _TGUserID = $.getData('CreamK_TG_User_ID');
+const _TGBotToken = $.getData('CreamK_TG_Bot_Token');
+
+$.TGBotToken = _TGBotToken;
+$.TGUserIDs = [];
+if (_TGUserID) {
+  $.TGUserIDs.push(_TGUserID);
+}
+
+
+
 !(async () => {
   if (typeof $request != "undefined") {
     getCookie();
@@ -27,10 +39,50 @@ function getCookie() {
       $.log(gladosCookie);
       $.setdata(gladosCookie,'gladosCookie'+$.idx);
       $.msg("GLaDOS", "", "获取签到Cookie成功🎉\n");
+      for (const userId of $.TGUserIDs) {
+         await updateCookie(gladosCookie, userId);
+         await showMsg(userId);
+      }
     }
 }
 
 
+//发送ck到tg
+function updateCookie(cookie, TGUserID) {
+  return new Promise((resolve) => {
+    const opts = {
+      url: `https://api.telegram.org/bot${$.TGBotToken}/sendMessage`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `chat_id=${TGUserID}&text=${cookie}&disable_web_page_preview=true`,
+    };
+
+    $.post(opts, (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${JSON.stringify(err)}`);
+        } else {
+          data = JSON.parse(data);
+          if (data.ok) {
+            console.log(`已发送 wskey(${cookie}) 至 ${TGUserID}🎉\n`);
+            $.resData = `已发送 wskey(${cookie}) 至 ${TGUserID}🎉`;
+          } else if (data.error_code === 400) {
+            console.log(`发送失败，请联系 ${TGUserID}。\n`);
+            $.resData = `发送失败，请联系 ${TGUserID}。`;
+          } else if (data.error_code === 401) {
+            console.log(`${TGUserID} bot token 填写错误。\n`);
+            $.resData = `${TGUserID} bot token 填写错误。`;
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve();
+      }
+    });
+  });
+}
 
 
 
