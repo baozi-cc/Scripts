@@ -83,6 +83,7 @@ var message="";
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
   }
+  $.log(message);
   if ($.isNode()){
       await notify.sendNotify($.name, message);
   }
