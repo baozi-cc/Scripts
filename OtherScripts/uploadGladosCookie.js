@@ -22,7 +22,7 @@ function getCookie() {
       $request.url.match(/checkin/)
     ) {
       const gladosCookie = $request.headers["Cookie"];
-      $.log(sicookie);
+      $.log(gladosCookie);
       $.setdata(gladosCookie, gladosCookie);
       $.msg("GLaDOS", "", "获取签到Cookie成功🎉");
     }
