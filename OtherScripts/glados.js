@@ -78,7 +78,7 @@ var message="";
      await get_flows(sicookie);
      await status(sicookie);
      message=message+'\n'
-     $.msg(message);
+    
      $.message_flows=""//清空get_flows里的消息
      $.message_sign=""//清空chekin里的消息
      $.sicookie=""
@@ -167,6 +167,7 @@ function status(cookie) {
         message += `已用${expday}天,剩余${remainday}天\n`;
         message +=$.message_flows
         message +=$.message_sign
+	$.msg("GLaDOS签到开始！",message);
       } else {
         $.log(response);
         $.msg("GLaDOS", "", "❌请重新登陆更新Cookie");
