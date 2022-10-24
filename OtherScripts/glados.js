@@ -38,10 +38,12 @@ if($.isNode()){ //node环境
 	
   gladosCookie=process.env.gladosCookie.split('#');
 
-}else{
-      
+}else{//qx环境
      gladosCookie.push($.getdata('gladosCookie'));
-	
+     let Count = ($.getdata('gladosCount') || '1') - 0;
+     for (let i = 2; i <= Count; i++) {       
+        gladosCookie.push($.getdata(`gladosCookie${i}`));
+    }	
 }
 
 var account;
