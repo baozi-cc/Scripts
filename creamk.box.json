@@ -126,7 +126,7 @@
     {
       "id": "Glados",
       "name": "Glados签到",
-      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","glodosCookie","glodosCookie2","glodosCookie3"],
+      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","gladosCookie","gladosCookie2","gladosCookie3"],
       "settings": [
         {
           "id": "CreamK_TG_User_ID",
@@ -141,19 +141,19 @@
           "type": "text"
         },
         {
-          "id": "glodosCookie",
+          "id": "gladosCookie",
           "name": "存储gladosCookie",
           "val": "",
           "type": "text"
         },
         {
-          "id": "glodosCookie2",
+          "id": "gladosCookie2",
           "name": "存储gladosCookie",
           "val": "",
           "type": "text"
         },
         {
-          "id": "glodosCookie3",
+          "id": "gladosCookie3",
           "name": "存储gladosCookie",
           "val": "",
           "type": "text"
