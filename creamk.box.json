@@ -126,7 +126,7 @@
     {
       "id": "Glados",
       "name": "Glados签到",
-      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","glodosCookie"],
+      "keys": ["CreamK_TG_User_ID","CreamK_TG_Bot_Token","glodosCookie","glodosCookie2","glodosCookie3"],
       "settings": [
         {
           "id": "CreamK_TG_User_ID",
