@@ -6,7 +6,8 @@
           适配多账号
 	  适配青龙
 
-【BoxJs】
+【BoxJs】https://raw.githubusercontent.com/CreamK/Scripts/main/creamk.box.json
+ Boxjs中填入ck和ck数量！！！！！
 
 【致谢】
 本脚本使用了Chavy的Env.js，感谢！
