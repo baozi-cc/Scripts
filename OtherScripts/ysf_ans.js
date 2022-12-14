@@ -4,6 +4,7 @@ const $ = new Env('ysf小程序答题');
 if ($response.body) {
   
     console.log($response.body)
+    $.msg($response.body);
         
 }
 
