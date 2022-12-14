@@ -5,8 +5,6 @@ if ($response.body) {
   
     console.log($response.body)
         
-} else {
-    $done({});
 }
 
 
