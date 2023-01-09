@@ -1,9 +1,0 @@
-#稳定
-shadowsocks=173.82.186.25:50004,method=none, password=IOSwgAYTREask(&1UHYTiq'&%12afSSR, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定① 关注公众号：ios黑科技 
-shadowsocks=154.9.204.30:50000,method=none, password=se4@rv77er_IJYTGFipv6, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定② 关注公 众号：ios黑科技 
-shadowsocks=154.9.204.156:60000,method=none, password=networkseIIUTY@65@#$_tup, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定③ 关注公 众号：ios黑科技 
-shadowsocks=154.3.6.5:40089,method=none, password=YTagavdbzIHGV, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定④ 关注公众号：ios黑科技
-shadowsocks=154.3.6.247:40089,method=none, password=Uyahgsbcxnz, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定⑤ 关注公众号：ios黑科技
-shadowsocks=38.143.0.6:40089,method=none, password=Usahbdnklakl, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定⑥ 关注公众号：ios黑科技
-shadowsocks=38.143.0.90:40089,method=none, password=najdhabDganmz, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定⑦ 关注公众号：ios黑科技
-shadowsocks=38.143.0.74:40089,method=none, password=hdbgsvbnna, ssr-protocol=auth_chain_a, obfs=plain, fast-open=false, udp-relay=false, tag=稳定⑧ 关注公众号：ios黑科技
